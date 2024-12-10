@@ -15,7 +15,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {addTodo, updateTodo, deleteTodo} from '../redux/reducers/requestSlice';
 import Icons from 'react-native-vector-icons/FontAwesome6';
-import { RootState } from '../redux/store';
+import { AppDispatch, RootState } from '../redux/store';
 
 interface IProps {
   storeData: {};

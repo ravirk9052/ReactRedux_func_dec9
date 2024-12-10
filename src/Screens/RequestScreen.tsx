@@ -3,7 +3,7 @@ import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import {requestApiCall} from '../redux/reducers/requestSlice';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, ParamListBase, useNavigation} from '@react-navigation/native';
 import {RootState, useAppDispatch} from '../redux/store';
 import {RootStackParamList} from '../../App';
 import {
@@ -12,17 +12,21 @@ import {
 } from '@react-navigation/native-stack';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home', 'Todos'>;
+interface IProps {
+  navigation: NavigationProp<ParamListBase>
+  route: {params:{id:number}}
+}
 
-const RequestScreen = (props: Props) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+const RequestScreen = ({navigation}:IProps) => {
+  // const navigation =
+  //   useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const dispatch = useAppDispatch();
   const storeData = useSelector((state: RootState) => state);
   useEffect(() => {
     if (storeData.ReducerApi.isData === false) {
       navigation.navigate('Home');
     } else {
-        navigation.navigate('Todos');
+      navigation.navigate('Todos');
     }
   }, [storeData.ReducerApi.isData, navigation]);
 
